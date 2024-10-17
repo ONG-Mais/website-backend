@@ -4,6 +4,7 @@ import {
   IVolunteerResponse,
 } from "../../interfaces/volunteer";
 import { AppError } from "../../middlewares/hanlerError";
+import sendEmail from "../../utils/emailSender";
 
 const volunteerService = async (
   data: IVolunteerRequest
@@ -27,6 +28,8 @@ const volunteerService = async (
       city: data.city,
     },
   });
+
+  await sendEmail(volunteer)
 
   console.log(volunteer);
   return volunteer;
