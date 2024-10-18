@@ -19,19 +19,27 @@ const volunteerService = async (
     throw new AppError("Email already exists", 400);
   }
 
-  const volunteer = await prisma.volunteer.create({
-    data: {
-      name: data.name,
-      email: data.email,
-      telefone: data.telefone,
-      state: data.state,
-      city: data.city,
-    },
-  });
 
-  await sendEmail(volunteer)
+  try {
+    const volunteer = await prisma.$transaction(async (prisma) => {
+      const newVolunteer = await prisma.volunteer.create({
+        data: {
+          name: data.name,
+          email: data.email,
+          telefone: data.telefone,
+          state: data.state,
+          city: data.city,
+        },
+      });
 
-  console.log(volunteer);
-  return volunteer;
+      await sendEmail(newVolunteer);
+
+      return newVolunteer;
+    });
+    return volunteer;
+  } catch (error) {
+    throw new AppError("Erro ao criar voluntário ou enviar e-mail", 500);
+  }
 };
+
 export default volunteerService;

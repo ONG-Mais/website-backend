@@ -3,7 +3,7 @@ import { AppError } from "../middlewares/hanlerError";
 
 const sendEmail = async (volunteer: any) => {
   const transporter = nodemailer.createTransport({
-    service: 'outlook',  
+    service: 'Gmail',  
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASSWORD,
