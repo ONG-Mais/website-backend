@@ -1,4 +1,4 @@
-export interface IVolunteerRequest {
+export interface ICompanyRequest {
   id: string;
   email: string;
   name: string;
@@ -8,7 +8,7 @@ export interface IVolunteerRequest {
   type: string;
 }
 
-export interface IVolunteerResponse {
+export interface ICompanyResponse {
   id: string;
   email: string;
   name: string;

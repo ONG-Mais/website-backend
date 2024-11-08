@@ -1,7 +1,8 @@
 import nodemailer from "nodemailer";
 import { AppError } from "../middlewares/hanlerError";
+import { IEmailRecipient } from "../interfaces/emailsender";
 
-const sendEmail = async (volunteer: any) => {
+const sendEmail = async (recipient: IEmailRecipient) => {
   const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
@@ -10,27 +11,37 @@ const sendEmail = async (volunteer: any) => {
     },
   });
 
-  const mailOptions = {
+  const mailOptionsAdmin = {
     from: process.env.EMAIL_USER,
     to: "anthonifelipi@gmail.com",
-    subject: "Novo Voluntário Cadastrado",
-    text: `Novo voluntário cadastrado:
-           Nome: ${volunteer.name}
-           E-mail: ${volunteer.email}
-           Telefone: ${volunteer.telefone}
-           Localização: ${volunteer.city}, ${volunteer.state}`,
+    subject: `Novo ${
+      recipient.type === "volunteer" ? "Voluntário" : "Empresa"
+    } Cadastrado`,
+    text: `Novo ${
+      recipient.type === "volunteer" ? "voluntário" : "Empresa"
+    } cadastrado:
+           Nome: ${recipient.name}
+           E-mail: ${recipient.email}
+           Telefone: ${recipient.telefone || "Não informado"}
+           Localização: ${recipient.city || "Não informada"}, ${
+      recipient.state || "Não informada"
+    }`,
   };
 
-  const mailOptions2 = {
+  const mailOptionsRecipient = {
     from: process.env.EMAIL_USER,
-    to: volunteer.email,
+    to: recipient.email,
     subject: "Cadastro realizado com sucesso",
-    text: `Olá, ${volunteer.name} ! Seu cadastro foi realizado com sucesso. Agora você pode ajudar a nossa causa!`,
+    text: `Olá, ${recipient.name}! Seu cadastro foi realizado com sucesso. ${
+      recipient.type === "volunteer"
+        ? "Agora você pode ajudar a nossa causa!"
+        : "Estamos felizes em contar com sua empresa em nossa rede."
+    }`,
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    await transporter.sendMail(mailOptions2);
+    await transporter.sendMail(mailOptionsAdmin);
+    await transporter.sendMail(mailOptionsRecipient);
     console.log("E-mail enviado com sucesso!");
   } catch (error) {
     console.error("Erro ao enviar e-mail:2", error);
