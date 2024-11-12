@@ -5,4 +5,4 @@ const companyRouter = Router();
 
 companyRouter.post("", createCompanyController);
 
-export default companyRouter
+export default companyRouter;

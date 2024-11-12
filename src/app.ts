@@ -5,6 +5,7 @@ import { PrismaClient } from "@prisma/client";
 import cors from "cors";
 import volunteerRouter from "./routes/volunteer.router";
 import companyRouter from "./routes/company";
+import { locationRouter } from "./routes/location";
 
 export const app = express();
 app.use(
@@ -19,5 +20,6 @@ app.use(express.json());
 
 app.use("/api/volunteers", volunteerRouter);
 app.use("/api/company", companyRouter);
+app.use("/api/location", locationRouter);
 
 export default app;
