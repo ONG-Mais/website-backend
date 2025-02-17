@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
 import createCompanyService from "../../services/company/company.service";
-import { ICompanyRequest, ICompanyResponse } from "../../interfaces/company";
+import { ICompany } from "../../interfaces/company";
+import { Request, Response } from "express";
 
-const createCompanyController = async (req: Request, res: Response):Promise<any> => {
+const createCompanyController = async (req: Request, res: Response): Promise<any> => {
   try {
-    const data: ICompanyRequest = req.body;
+    const data: ICompany = req.body;
 
     const newCompany = await createCompanyService(data);
 

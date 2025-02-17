@@ -1,13 +1,10 @@
-import { Request, Response } from "express";
-import { IVolunteerRequest } from "../../interfaces/volunteer";
 import volunteerService from "../../services/volunteer/volunteer.service";
+import { IVolunteer } from "../../interfaces/volunteer";
+import { Request, Response } from "express";
 
-const volunteerController = async (
-  req: Request,
-  res: Response
-): Promise<any> => {
+const volunteerController = async (req: Request, res: Response): Promise<any> => {
   try {
-    const data: IVolunteerRequest = req.body;
+    const data: IVolunteer = req.body;
     const volunteer = await volunteerService(data);
     return res.status(201).json(volunteer);
   } catch (error) {

@@ -1,21 +1,8 @@
-export interface IVolunteerRequest {
-  id: string;
+export interface IVolunteer {
   email: string;
   name: string;
   telefone: string;
   state: string;
   city: string;
   type: string;
-}
-
-export interface IVolunteerResponse {
-  id: string;
-  email: string;
-  name: string;
-  telefone: string;
-  state: string;
-  city: string;
-  type: string;
-  createdAt: Date;
-  updatedAt: Date;
 }
