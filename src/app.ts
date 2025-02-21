@@ -4,6 +4,7 @@ import companyRouter from "./routes/company.routes";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import contactRouter from "./routes/contact.routes";
 
 dotenv.config();
 
@@ -20,5 +21,6 @@ app.use(express.json());
 app.use("/api/volunteers", volunteerRouter);
 app.use("/api/company", companyRouter);
 app.use("/api/location", locationRouter);
+app.use("/api/contact", contactRouter);
 
 export default app;
