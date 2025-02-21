@@ -88,7 +88,10 @@ Telefone: ${emailRecipient.data.telefone}
 Localização: ${emailRecipient.data.city}, ${emailRecipient.data.state}
 Data de cadastro: ${currentDate()}`
       : `
-Mensagem: ${emailRecipient.data.message}
+Mensagem: 
+\n
+"${emailRecipient.data.message}"
+\n
 Data de envio: ${currentDate()}`
   }
   `,
@@ -112,7 +115,11 @@ Ficamos felizes em contar com sua empresa em nossa rede! Seu cadastro foi realiz
   
 Acompanhe nosso trabalho: https://ong-mais.vercel.app`
           : `Olá, ${emailRecipient.data.name}!
-A sua mensagem: \n"${emailRecipient.message}"\nFoi recebida por nós com sucesso. Levaremos os seus pontos em consideração e, caso necessário, entraremos em contato com você.
+A sua mensagem: 
+\n
+"${emailRecipient.message}"
+\n
+Foi recebida por nós com sucesso. Levaremos os seus pontos em consideração e, caso necessário, entraremos em contato com você.
   
 Continue acompanhando o nosso trabalho: https://ong-mais.vercel.app`,
   };
