@@ -1,8 +1,8 @@
-export interface ICompany {
-  email: string;
-  name: string;
+import { IEmailRecipient } from "./emailsender";
+
+export interface ICompany extends IEmailRecipient {
+  type: "company";
   telefone: string;
-  state: string;
   city: string;
-  type: string;
+  state: string;
 }

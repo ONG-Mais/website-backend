@@ -1,8 +1,8 @@
-export interface IVolunteer {
-  email: string;
-  name: string;
+import { IEmailRecipient } from "./emailsender";
+
+export interface IVolunteer extends IEmailRecipient {
+  type: "volunteer";
   telefone: string;
-  state: string;
   city: string;
-  type: string;
+  state: string;
 }
