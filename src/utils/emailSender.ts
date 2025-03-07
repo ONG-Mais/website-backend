@@ -100,7 +100,10 @@ Data de envio: ${currentDate()}`
   const mailOptionsRecipient = {
     from: process.env.EMAIL_USER,
     to: emailRecipient.data.email,
-    subject: "ONG Mais - Cadastro realizado com sucesso!",
+    subject:
+      emailRecipient.title == "contact"
+        ? "ONG Mais - Contato recebido com sucesso!"
+        : "ONG Mais - Cadastro realizado com sucesso!",
     text:
       emailRecipient.data.type === "volunteer"
         ? `Olá, ${emailRecipient.data.name}!
